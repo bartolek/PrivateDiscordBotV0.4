@@ -4,6 +4,8 @@ import discord
 from discord.ext import commands 
 import helptxt
 import random
+import requests 
+
 
 intents = discord.Intents.default()
 intents.members = True
@@ -94,6 +96,12 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.BadArgument):
         await ctx.send("Poprawne użycie komendy to: $randomizer int int")
 
+@bot.command()
+async def kanyenadzis(ctx):
+    response = requests.get("https://api.kanye.rest")
+    api = response.json()
+    await ctx.send(api.get('quote'))
+
 
 
 
@@ -103,5 +111,6 @@ async def on_command_error(ctx, error):
 #listen nazwapiosenki
 #randomizer min max
 #goomba status/on/off
+#kanyenadzis
 
 bot.run("OTM3MDg4NTQ5NDQ1MDYyNzQ3.YfWpuA.87Lo-nPE0dKYyTGN7S6V4W58YU0")
