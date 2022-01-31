@@ -44,31 +44,33 @@ async def randomizer(ctx, min : int, max : int):
         await ctx.channel.send("Pierwsza podana liczba musi być mniejsza od drugiej!")
 
 #Goomba
-currentStatus = "OFF"
+currentStatus = {'937667379159248946': 'OFF'
+}
 
 @bot.command()
 async def goomba(ctx, input : str):
         global currentStatus
+        channel_id = ctx.message.guild.id
         if input == "status":
-            await ctx.channel.send(f"Aktualny status goomby to: {currentStatus}")    
+            if str(channel_id) in currentStatus:
+                await ctx.channel.send(f"Aktualny status goomby na tym serwerze to: {currentStatus.get(str(channel_id))}")
+            else:
+                currentStatus[str(channel_id)] = 'OFF'
+                await ctx.channel.send(f"Aktualny status goomby na tym serwerze to: {currentStatus.get(str(channel_id))}")
         elif input == "ON" or input == "OFF":
-            currentStatus = input
-            await ctx.channel.send(f"Zmieniłeś status goomby na: {currentStatus}")
+            currentStatus[str(channel_id)] = input
+            await ctx.channel.send(f"Zmieniłeś status goomby na tym serwerze na: {currentStatus.get(str(channel_id))}")
         else:
             await ctx.channel.send("Poprawne użycie komendy to: $goomba status/ON/OFF")
 
 @bot.listen('on_message')
 async def on_messages(message):
     if message.attachments:
-        if currentStatus == "ON":
-            emojiA = '\U0001F1E6'
-            emojiB = '\U0001F1E7'
-            emojiC = '\U0001F1E8'
-            emojiD = '\U0001F1E9'
-            await message.add_reaction(emojiA)
-            await message.add_reaction(emojiB)
-            await message.add_reaction(emojiC)
-            await message.add_reaction(emojiD)
+        if currentStatus.get(str(message.guild.id)) == "ON":
+            await message.add_reaction('\U0001F1E6')
+            await message.add_reaction('\U0001F1E7')
+            await message.add_reaction('\U0001F1E8')
+            await message.add_reaction('\U0001F1E9')
             await bot.process_commands(message)
 
 #Wilusz reaction emoji
