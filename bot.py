@@ -24,6 +24,7 @@ bot.remove_command("help")
 @bot.command()
 async def help(ctx):
     await helptxt.help(ctx)
+    await ctx.author.send(f'Bot jest online na danej liczbie serwerów: {len(bot.guilds)}')
 
 # Zmiana statusu bota Gra/Słucha
 @bot.command()
