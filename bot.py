@@ -2,9 +2,8 @@ from unicodedata import name
 from black import err
 import discord
 from discord.ext import commands 
-import helptxt
-import random
 import requests 
+import os
 
 
 intents = discord.Intents.default()
@@ -21,28 +20,11 @@ async def on_ready():
 
 # Odwołanie do pliku helptxt.py i egzekucja
 bot.remove_command("help")
-@bot.command()
-async def help(ctx):
-    await helptxt.help(ctx)
-    await ctx.author.send(f'Bot jest online na danej liczbie serwerów: {len(bot.guilds)}')
 
-# Zmiana statusu bota Gra/Słucha
-@bot.command()
-async def play(ctx, gamename):
-    await bot.change_presence(activity=discord.Game(name=gamename))
+for file in os.listdir("./cogs"):
+    if file.endswith(".py"):
+        bot.load_extension(f"cogs.{file[:-3]}")
 
-@bot.command()
-async def listen(ctx, songname):
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=songname))
-
-#Losuj liczbe w przedziale
-@bot.command()
-async def randomizer(ctx, min : int, max : int):
-    if min < max:
-        numer = random.randrange(min, max)
-        await ctx.channel.send(numer)
-    else:
-        await ctx.channel.send("Pierwsza podana liczba musi być mniejsza od drugiej!")
 
 #Goomba
 currentStatus = {'937667379159248946': 'OFF'
@@ -89,21 +71,18 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         await ctx.send("Taka komenda nie istnieje")
 
-@goomba.error
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send("W komendzie brakuje argumentu")
 
-@randomizer.error
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.BadArgument):
-        await ctx.send("Poprawne użycie komendy to: $randomizer int int")
+#@goomba.error
+#async def on_command_error(ctx, error):
+#    if isinstance(error, commands.MissingRequiredArgument):
+#        await ctx.send("W komendzie brakuje argumentu")
 
-@bot.command()
-async def kanyenadzis(ctx):
-    response = requests.get("https://api.kanye.rest")
-    api = response.json()
-    await ctx.send(api.get('quote'))
+
+#@bot.command()
+#async def kanyenadzis(ctx):
+#    response = requests.get("https://api.kanye.rest")
+#    api = response.json()
+#    await ctx.send(api.get('quote'))
 
 
 
