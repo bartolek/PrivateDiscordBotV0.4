@@ -78,11 +78,11 @@ async def on_command_error(ctx, error):
 #        await ctx.send("W komendzie brakuje argumentu")
 
 
-#@bot.command()
-#async def kanyenadzis(ctx):
-#    response = requests.get("https://api.kanye.rest")
-#    api = response.json()
-#    await ctx.send(api.get('quote'))
+@bot.command()
+async def kanyenadzis(ctx):
+    response = requests.get("https://api.kanye.rest")
+    api = response.json()
+    await ctx.send(api.get('quote'))
 
 
 
