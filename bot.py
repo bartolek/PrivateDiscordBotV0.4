@@ -79,7 +79,7 @@ async def on_command_error(ctx, error):
 
 
 @bot.command()
-async def kanyenadzis(ctx):
+async def yenadzis(ctx):
     response = requests.get("https://api.kanye.rest")
     api = response.json()
     await ctx.send(api.get('quote'))

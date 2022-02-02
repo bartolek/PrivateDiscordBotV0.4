@@ -13,7 +13,7 @@ class help(commands.Cog):
         embed.add_field(name="$play {Nazwa}", value="Zmiana statusu bota, W grze:", inline=True)
         embed.add_field(name="$listen {Nazwa}", value="Zmiana statusu bota, Słucha:", inline=True)
         embed.add_field(name="$randomizer {Arg} {Arg}", value="Losuje liczbę z przedziału ", inline=False)
-        embed.add_field(name="$kanyenadzis", value="Cytat Kanye na dzis", inline=False)
+        embed.add_field(name="$yenadzis", value="Cytat Kanye na dzis", inline=False)
         await ctx.author.send(embed=embed)
         await ctx.author.send(f'Bot jest online na danej liczbie serwerów: {len(self.bot.guilds)}')
 
