@@ -17,8 +17,9 @@ class Randomizer(commands.Cog):
 
     @randomizer.error
     async def on_command_error(self, ctx, error):
-        if isinstance(error, commands.BadArgument) or isinstance(error, commands.CommandNotFound):
+        if isinstance(error, commands.BadArgument) or isinstance(error, commands.CommandNotFound) or isinstance(error, commands.MissingRequiredArgument):
             await ctx.send("Poprawne użycie komendy to: $randomizer int int")
+
 
 def setup(bot):
     bot.add_cog(Randomizer(bot))
