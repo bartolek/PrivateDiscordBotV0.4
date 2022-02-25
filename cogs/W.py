@@ -1,9 +1,6 @@
 import discord
 from discord.ext import commands
 
-currentStatus = {'937667379159248946': 'OFF'
-    }
-
 class W(commands.Cog):
 
     def __init__(self, bot):
