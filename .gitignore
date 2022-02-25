@@ -1,6 +1,7 @@
 __pycache__/
 *.pyc
-.json
+key.json
+discord.db
 cogs/__pycache__/ye.cpython-310.pyc
 cogs/__pycache__/ye.cpython-310.pyc
 cogs/__pycache__/ye.cpython-310.pyc
