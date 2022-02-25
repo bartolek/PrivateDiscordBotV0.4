@@ -11,7 +11,7 @@ class W(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        słownik = ['Wilusz', 'wilusz', 'Wilusza', "wilusza"]
+        słownik = ['Witam']
         for word in słownik:
             if word in message.content:
                 await message.add_reaction('\U00002642')
